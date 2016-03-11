@@ -65,7 +65,7 @@ function(isConfirm) {
 $scope.edittCar = function(car) {
 $scope.editCar = angular.copy(car); 
 if(!$scope.editCar.pic){
-  $scope.editCar.pic = 'http://rs304.pbsrc.com/albums/nn180/4chanRus/Awesome%20Face/1213841779552.png~c200'
+  $scope.editCar.pic = 'https://rs304.pbsrc.com/albums/nn180/4chanRus/Awesome%20Face/1213841779552.png~c200'
  }
 };
 
@@ -86,7 +86,7 @@ $scope.confirm = function(car) {
 $scope.picture = function(car) {
 $scope.car = angular.copy(car); 
  if(!$scope.car.pic){
-  $scope.car.pic = 'http://rs304.pbsrc.com/albums/nn180/4chanRus/Awesome%20Face/1213841779552.png~c200'
+  $scope.car.pic = 'https://rs304.pbsrc.com/albums/nn180/4chanRus/Awesome%20Face/1213841779552.png~c200'
  }
 
 }

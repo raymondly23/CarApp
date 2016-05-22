@@ -2,11 +2,11 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
   <script src="module.js"></script>
@@ -15,111 +15,135 @@
   <title>Car App</title>
 </head>
 <body ng-app='carApp' ng-controller='mainCtrl'>
-<div class='container'>
-<h1><i class="fa fa-car"></i>
-'s List!</h1>
-<p>Post your car up to sell your car!</p>
-<input type="number" placeholder="Price" ng-model='newCar.price'>
-<input type="text" placeholder="Make" ng-model='newCar.make'>
-<input type="text" placeholder="Model" ng-model='newCar.model'>
-<input type="number" placeholder="Year" ng-model='newCar.year'>
-<input type="text" placeholder="Description" ng-model='newCar.desc'>
-<input type="text" placeholder="Upload a Pic" ng-model='newCar.pic'>
-<button ng-click='addCar()' class='btn btn-info'>POST!</button>
-<button ng-click='clear()' class='btn btn-info'>Clear!</button>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-    <th>Price</th>
-    <th>Make</th>
-    <th>Model</th>
-    <th>Year</th>
-    <th>Description</th>
-    <th>Edit Info</th>
-    <th>Delete!</th>
-    <th>Check the Car Out!</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat='car in cars track by $index'>
-      <td>{{car.price | currency}}</td>
-      <td>{{car.make}}</td>
-      <td>{{car.model}}</td>
-      <td>{{car.year}}</td>
-      <td>{{car.desc}}</td>
-      <td><button class='btn btn-success' ng-click='edittCar(car)' data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o"></i>
-</button></td>
-      <td><button class='btn btn-danger' ng-click='delete(car)'><i class="fa fa-trash"></i>
-</button></td>
-      <td><button class='btn btn-info' ng-click='picture(car)' data-toggle="modal" data-target="#picModal"><i class="fa fa-camera"></i>
-</button></td>
-    </tr>
-  </tbody>
-</table>
-
-
-<div class="container">
-  <div class="modal fade" id="picModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-        <div class="modal-body">
-          <img ng-src='{{car.pic}}' style="max-width: 500px; max-height: 400px">
-        </div> 
+  <div class='container center'>
+    <h1><i class="fa fa-car"></i>
+      's List!</h1>
+      <p>Post your car up to sell your car!</p>
+      <div class="row">
+      <div class='input-field col s3'>
+      <label for="make">Make</label>
+      <input type="text" ng-model='newCar.make' id='make'>
+      </div>
+      <div class='input-field col s3'>
+      <label for="model">Model</label>
+      <input type="text" ng-model='newCar.model' id='model'>
+      </div>
+      <div class='input-field col s3'>
+      <label for="year">Year</label>
+      <input type="number" ng-model='newCar.year' id='year'>
+      </div>
+      <div class='input-field col s3'>
+      <label for="price">Asking Price</label>
+      <input type="number" ng-model='newCar.price' id='price'>
+      </div>
+      </div>
+      <div class="input-field">
+      <textarea type="text" ng-model='newCar.desc' id='desc' class="materialize-textarea"></textarea>
+      <label for="desc">Description</label>
+      </div>
+      <div>
+      <div class='input-field file-field'>
+      <div class="btn">
+        <span>File</span>
+        <input type="file" multiple>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload one or more files" ng-model='newCar.pic'>
+      </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-<div class="container">
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Edit Information</h4>
-        </div>
-        <div class="modal-body">
-        <img ng-src='{{editCar.pic}}' align="left" style="max-width: 500px; max-height: 400px">
-          <label for="Price">Price:</label>
-          <input type="number" placeholder="Price" ng-model='editCar.price'>
-          <br>
-          <label for="Make">Make:</label>
-          <input type="text" placeholder="Make" ng-model='editCar.make'>
-          <br>
-          <label for="Model">Model:</label>
-          <input type="text" placeholder="Model" ng-model='editCar.model'>
-          <br>
-          <label for="Year">Year:</label>
-          <input type="number" placeholder="Year" ng-model='editCar.year'>
-          <br>
-          <label for="Description">Description:</label>
-          <input type="text" placeholder="Description" ng-model='editCar.desc'>
-          <br>
-          <label for="Picture">Picture:</label>
-          <input type="text" placeholder="Picture" ng-model='editCar.pic'>
-        </div>
-        <div class="modal-footer">
-          <button ng-click='confirm(editCar)' class='confirm btn btn-success' data-dismiss="modal">
-            <i class="fa fa-check"></i>
+      <button ng-click='addCar(newCar)' class='btn btn-info'>POST!</button>
+      <button ng-click='clear()' class='btn btn-info'>Clear!</button>
+    <table class="table center">
+      <thead>
+        <tr>
+          <th>Price</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>Edit Info</th>
+          <th>Delete!</th>
+          <th>Check the Car Out!</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='car in cars track by $index'>
+          <td>{{car.price | currency}}</td>
+          <td>{{car.make}}</td>
+          <td>{{car.model}}</td>
+          <td>{{car.year}}</td>
+          <td>
+            <button class='btn btn-success' ng-click='edittCar(car)' data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+          </td>
+          <td>
+          <button class='btn btn-danger' ng-click='delete(car)'>
+            <i class="fa fa-trash"></i>
           </button>
-          <button ng-click='cancelEdit()' class='cancel btn btn-danger' data-dismiss="modal">
-            <i class="fa fa-times"></i>
+          </td>
+          <td>
+          <button class="waves-effect waves-light btn btn-info modal-trigger" href="#picModal" ng-click='picture(car)'>
+            <i class="fa fa-camera"></i>
           </button>
-        </div>
-      </div>
-      
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="picModal" class="modal">
+    <div class="modal-content">
+      <img ng-src='{{car.pic}}' style="width: 500px; height: 400px">
+      <p class='center'>{{car.desc}}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
-  
-</div>
+
+
+  <div class="container">
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Edit Information</h4>
+          </div>
+          <div class="modal-body">
+            <img ng-src='{{editCar.pic}}' align="left" style="max-width: 500px; max-height: 400px">
+            <label for="Price">Price:</label>
+            <input type="number" placeholder="Price" ng-model='editCar.price'>
+            <br>
+            <label for="Make">Make:</label>
+            <input type="text" placeholder="Make" ng-model='editCar.make'>
+            <br>
+            <label for="Model">Model:</label>
+            <input type="text" placeholder="Model" ng-model='editCar.model'>
+            <br>
+            <label for="Year">Year:</label>
+            <input type="number" placeholder="Year" ng-model='editCar.year'>
+            <br>
+            <label for="Description">Description:</label>
+            <input type="text" placeholder="Description" ng-model='editCar.desc'>
+            <br>
+            <label for="Picture">Picture:</label>
+            <input type="text" placeholder="Picture" ng-model='editCar.pic'>
+          </div>
+          <div class="modal-footer">
+            <button ng-click='confirm(editCar)' class='confirm btn btn-success' data-dismiss="modal">
+              <i class="fa fa-check"></i>
+            </button>
+            <button ng-click='cancelEdit()' class='cancel btn btn-danger' data-dismiss="modal">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>
